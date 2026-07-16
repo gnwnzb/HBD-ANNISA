@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selamat Ulang Tahun, Annisa Shafa Aini</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- ============================ -->
+    <!-- LAYER EFEK LATAR BELAKANG    -->
+    <!-- ============================ -->
+    <canvas id="starCanvas" class="fx-layer"></canvas>
+    <div id="lightBackground" class="light-bg"></div>
+    <div id="petalsContainer" class="fx-layer"></div>
+    <div id="heartsContainer" class="fx-layer"></div>
+    <div id="confettiContainer" class="fx-layer"></div>
+
+    <!-- ============================ -->
+    <!-- HALAMAN PEMBUKA / UNDANGAN  -->
+    <!-- ============================ -->
+    <section id="cover" class="cover">
+        <div class="cover-glass">
+            <p class="cover-sub">Sebuah hadiah kecil untuk hari spesialmu</p>
+            <h1 class="cover-title">Selamat Ulang Tahun</h1>
+            <p class="cover-name">Annisa Shafa Aini</p>
+            <button id="openGiftBtn" class="btn-primary">🎁 Buka Hadiah</button>
+            <p class="cover-from">dari <span>Ultrawan</span></p>
+        </div>
+    </section>
+
+    <!-- ============================ -->
+    <!-- KONTEN UTAMA                -->
+    <!-- ============================ -->
+    <main id="mainContent" class="main-content">
+
+        <!-- Hero & Nama -->
+        <section class="hero">
+            <h2 class="hero-greeting">Hari ini milikmu, Annisa</h2>
+            <p class="hero-tagline">Terima kasih sudah hadir di dunia ini.</p>
+        </section>
+
+        <!-- Countdown -->
+        <section class="section countdown-section">
+            <h3 class="section-title">Menuju Momen Spesial</h3>
+            <div id="countdown" class="countdown">
+                <div class="cd-box">
+                    <span id="cdDays" class="cd-num">00</span>
+                    <span class="cd-label">Hari</span>
+                </div>
+                <div class="cd-box">
+                    <span id="cdHours" class="cd-num">00</span>
+                    <span class="cd-label">Jam</span>
+                </div>
+                <div class="cd-box">
+                    <span id="cdMinutes" class="cd-num">00</span>
+                    <span class="cd-label">Menit</span>
+                </div>
+                <div class="cd-box">
+                    <span id="cdSeconds" class="cd-num">00</span>
+                    <span class="cd-label">Detik</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Surat Cinta -->
+        <section class="section letter-section">
+            <h3 class="section-title">Sebuah Surat untukmu</h3>
+            <button id="openLetterBtn" class="btn-secondary">✉ Buka Surat</button>
+            <article id="loveLetter" class="letter hidden">
+                <p>Untuk Annisa Shafa Aini,</p>
+                <p>
+                    Setiap detik bersamamu adalah hadiah yang tak pernah ku minta
+                    namun selalu ku syukuri. Di hari spesial ini, ku berharap
+                    semua kebahagiaan dunia berputar ke arahmu — seperti bumi
+                    yang tak pernah berhenti berputar ke arah matahari.
+                </p>
+                <p>
+                    Semoga Allah menjagamu selalu, sehatkan, bahagiakan, dan
+                    dekatkan pada semua kebaikan. Terima kasih sudah menjadi
+                    cahaya di hari-hariku.
+                    Tuhan aku titip dia disana ya tolong buat tidurnya selalu nyenyak jangan biarkan overthinking datang disetiap malamnya jaga badanya supaya tetap sehat kuat menghadapi banyak hal yang kadang ga sempat dia ceritakan kesiapa siapa kalo dia sedang capek tolong peluk dia dengan caramu yang paling indah melalaui istirahat yang cukup melalui orang" baik yang datang padsedi atau berbagai hal kecil yang bisa membuatnya tersenyum lagi, Tuhan jauhkan dia dari orang" yang datang cuma untuk membuatnya sedih yang membuatnya merasa kurang dan berharga, tolong jangan biarkan dia kehilangan alasan untuk bertahan ya Tuhan karna aku jadi salah satu orang yang ingin melihat dia bahagia,meski mungkin aku belum ada didekatnya Tuhan :)
+                </p>
+                <p class="letter-sign">Dengan cinta,<br /><strong>Ultrawan</strong></p>
+            </article>
+        </section>
+
+        <!-- Kata-kata Romantis Berganti -->
+        <section class="section quote-section">
+            <div class="quote-glass">
+                <p id="rotatingQuote" class="quote-text">Kamu adalah alasan paling lembut untuk tersenyum.</p>
+            </div>
+        </section>
+
+        <!-- Galeri Kenangan -->
+        <section class="section gallery-section">
+            <h3 class="section-title">Galeri Kenangan</h3>
+            <div id="galleryGrid" class="gallery-grid">
+                <!-- Diisi otomatis oleh script.js untuk 10 foto -->
+            </div>
+        </section>
+
+        <!-- Slider Foto -->
+        <section class="section slider-section">
+            <h3 class="section-title">Momen Kita</h3>
+            <div id="slider" class="slider">
+                <div id="sliderTrack" class="slider-track">
+                    <!-- Slide 1..10 diisi otomatis oleh script.js -->
+                </div>
+                <button id="prevBtn" class="slider-nav prev" aria-label="Sebelumnya">‹</button>
+                <button id="nextBtn" class="slider-nav next" aria-label="Berikutnya">›</button>
+                <div id="sliderDots" class="slider-dots"></div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Made with ❤️ by <strong>Ultrawan</strong>.</p>
+        </footer>
+    </main>
+
+    <!-- ============================ -->
+    <!-- KONTROL MUSIK                -->
+    <!-- ============================ -->
+    <div id="musicControls" class="music-controls hidden">
+        <button id="playPauseBtn" class="mc-btn" aria-label="Play/Pause">▶ Play Music</button>
+        <label class="mc-volume" aria-label="Volume">
+            <span>🔊</span>
+            <input id="volumeSlider" type="range" min="0" max="1" step="0.01" value="0.6" />
+        </label>
+    </div>
+
+    <!-- Audio element (loop) -->
+    <audio id="bgMusic" src="music/lagu.mp3" loop preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>

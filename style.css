@@ -1,0 +1,588 @@
+/* ============================================================
+   TEMA: Putih dominan, elegan, romantis, premium, glassmorphism
+   ============================================================ */
+
+:root {
+    --white: #ffffff;
+    --soft-white: #fdfdff;
+    --rose: #e8b4c4;
+    --rose-deep: #d98aa3;
+    --pink-soft: #fdeef2;
+    --gold: #d4af7a;
+    --text: #4a3f44;
+    --text-soft: #6b5f66;
+    --glass-bg: rgba(255, 255, 255, 0.55);
+    --glass-border: rgba(255, 255, 255, 0.65);
+    --shadow-soft: 0 10px 40px rgba(180, 120, 140, 0.18);
+    --shadow-strong: 0 20px 60px rgba(180, 120, 140, 0.28);
+    --radius: 22px;
+    --transition: 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* ---------- Reset dasar ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: linear-gradient(135deg, #ffffff 0%, #fdf6f9 50%, #f9eef3 100%);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.7;
+    position: relative;
+}
+
+/* ---------- Layer efek (canvas & container) ---------- */
+.fx-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ---------- Background cahaya ---------- */
+.light-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(232, 180, 196, 0.35), transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(212, 175, 122, 0.25), transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(253, 238, 242, 0.6), transparent 50%);
+    animation: lightDrift 14s ease-in-out infinite alternate;
+}
+
+@keyframes lightDrift {
+    0%   { transform: scale(1) translate(0, 0); opacity: 0.85; }
+    100% { transform: scale(1.1) translate(-2%, 2%); opacity: 1; }
+}
+
+/* ---------- Canvas bintang ---------- */
+#starCanvas {
+    z-index: 2;
+}
+
+/* ---------- Petals / hearts / confetti ---------- */
+#petalsContainer { z-index: 3; }
+#heartsContainer  { z-index: 4; }
+#confettiContainer { z-index: 50; }
+
+.petal, .heart, .confetti-piece {
+    position: absolute;
+    top: -40px;
+    will-change: transform;
+}
+
+.petal {
+    font-size: 22px;
+    opacity: 0.85;
+    animation: petalFall linear infinite;
+}
+
+@keyframes petalFall {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.9; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+.heart {
+    font-size: 18px;
+    color: var(--rose-deep);
+    opacity: 0.85;
+    animation: heartFloat linear infinite;
+}
+
+@keyframes heartFloat {
+    0%   { transform: translateY(0) scale(0.6); opacity: 0; }
+    15%  { opacity: 0.9; }
+    100% { transform: translateY(-110vh) scale(1.1); opacity: 0; }
+}
+
+.confetti-piece {
+    width: 10px;
+    height: 14px;
+    border-radius: 2px;
+    animation: confettiFall linear forwards;
+}
+
+@keyframes confettiFall {
+    0%   { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* ============================================================
+   HALAMAN PEMBUKA / COVER
+   ============================================================ */
+.cover {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(253,238,242,0.92));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+.cover.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.cover-glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-strong);
+    padding: 60px 50px;
+    text-align: center;
+    max-width: 90%;
+    width: 540px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.cover-sub {
+    font-style: italic;
+    color: var(--text-soft);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.cover-title {
+    font-size: clamp(2rem, 6vw, 3.4rem);
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 6px;
+    letter-spacing: 1.5px;
+}
+
+.cover-name {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    color: var(--rose-deep);
+    font-style: italic;
+    margin-bottom: 30px;
+}
+
+.cover-from {
+    margin-top: 26px;
+    font-size: 0.95rem;
+    color: var(--text-soft);
+    font-style: italic;
+}
+
+.cover-from span {
+    color: var(--rose-deep);
+    font-weight: bold;
+}
+
+/* ---------- Tombol ---------- */
+.btn-primary, .btn-secondary, .mc-btn {
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+    color: #fff;
+    padding: 14px 40px;
+    border-radius: 50px;
+    box-shadow: 0 8px 24px rgba(217, 138, 163, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 14px 36px rgba(217, 138, 163, 0.55);
+}
+
+.btn-secondary {
+    background: var(--glass-bg);
+    color: var(--rose-deep);
+    padding: 12px 30px;
+    border-radius: 50px;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-soft);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    background: var(--rose);
+    color: #fff;
+}
+
+/* ============================================================
+   KONTEN UTAMA
+   ============================================================ */
+.main-content {
+    position: relative;
+    z-index: 5;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1.2s ease, visibility 1.2s ease;
+}
+
+.main-content.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+    text-align: center;
+    padding: 80px 20px 40px;
+}
+
+.hero-greeting {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 8px;
+}
+
+.hero-tagline {
+    font-style: italic;
+    color: var(--text-soft);
+    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+}
+
+/* ---------- Section umum ---------- */
+.section {
+    padding: 50px 20px;
+    max-width: 980px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.section-title {
+    font-size: clamp(1.3rem, 3.5vw, 1.9rem);
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 28px;
+    letter-spacing: 1px;
+}
+
+/* ---------- Countdown ---------- */
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.cd-box {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    padding: 20px 28px;
+    min-width: 90px;
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform var(--transition);
+}
+
+.cd-box:hover { transform: translateY(-4px); }
+
+.cd-num {
+    display: block;
+    font-size: 2rem;
+    color: var(--rose-deep);
+    font-weight: bold;
+}
+
+.cd-label {
+    font-size: 0.85rem;
+    color: var(--text-soft);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ---------- Surat ---------- */
+.letter.hidden { display: none; }
+
+.letter {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    padding: 40px 35px;
+    margin: 20px auto 0;
+    max-width: 640px;
+    text-align: left;
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    animation: letterFadeIn 1s ease;
+}
+
+@keyframes letterFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.letter p { margin-bottom: 16px; }
+.letter-sign { text-align: right; margin-top: 24px; }
+.letter-sign strong { color: var(--rose-deep); }
+
+/* ---------- Quote berganti ---------- */
+.quote-section { padding: 30px 20px; }
+
+.quote-glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    padding: 36px 30px;
+    max-width: 700px;
+    margin: 0 auto;
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.quote-text {
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    font-style: italic;
+    color: var(--text);
+    transition: opacity 0.8s ease;
+}
+
+.quote-text.fading { opacity: 0; }
+
+/* ---------- Galeri ---------- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 14px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: var(--shadow-soft);
+    aspect-ratio: 1 / 1;
+    background: #f4e8ee;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+    display: block;
+}
+
+.gallery-item:hover img { transform: scale(1.08); }
+
+/* ---------- Slider ---------- */
+.slider {
+    position: relative;
+    max-width: 760px;
+    margin: 0 auto;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-strong);
+    background: #f4e8ee;
+    aspect-ratio: 4 / 3;
+}
+
+.slider-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slider-track .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1s ease;
+    overflow: hidden;
+}
+
+.slider-track .slide.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+.slider-track .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform 6s ease;
+}
+
+.slider-track .slide.active img {
+    /* Efek zoom lembut saat slide aktif */
+    transform: scale(1.12);
+}
+
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--rose-deep);
+    font-size: 2rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.slider-nav:hover {
+    background: var(--rose);
+    color: #fff;
+}
+
+.slider-nav.prev { left: 14px; }
+.slider-nav.next { right: 14px; }
+
+.slider-dots {
+    position: absolute;
+    bottom: 16px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    z-index: 5;
+}
+
+.slider-dots .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.6);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.slider-dots .dot.active {
+    background: var(--rose-deep);
+    transform: scale(1.3);
+}
+
+/* ---------- Footer ---------- */
+.footer {
+    text-align: center;
+    padding: 40px 20px 80px;
+    color: var(--text-soft);
+    font-style: italic;
+}
+
+.footer strong { color: var(--rose-deep); font-style: normal; }
+
+/* ============================================================
+   KONTROL MUSIK
+   ============================================================ */
+.music-controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 80;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 10px 16px;
+    border-radius: 50px;
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.music-controls.hidden { display: none; }
+
+.mc-btn {
+    background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+}
+
+.mc-btn:hover { transform: translateY(-2px); }
+
+.mc-volume {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--rose-deep);
+    font-size: 1.1rem;
+}
+
+.mc-volume input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 90px;
+    height: 4px;
+    background: rgba(217, 138, 163, 0.3);
+    border-radius: 50px;
+    outline: none;
+}
+
+.mc-volume input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--rose-deep);
+    cursor: pointer;
+}
+
+.mc-volume input[type="range"]::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--rose-deep);
+    cursor: pointer;
+    border: none;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 600px) {
+    .cover-glass { padding: 40px 25px; }
+    .cd-box { padding: 14px 18px; min-width: 70px; }
+    .cd-num { font-size: 1.5rem; }
+    .slider-nav { width: 38px; height: 38px; font-size: 1.5rem; }
+    .music-controls { right: 10px; bottom: 10px; padding: 8px 12px; gap: 8px; }
+    .mc-btn { padding: 6px 12px; font-size: 0.82rem; }
+    .mc-volume input[type="range"] { width: 70px; }
+    .section { padding: 35px 15px; }
+    .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
+    .letter { padding: 30px 22px; }
+}
+
+@media (max-width: 380px) {
+    .cd-box { min-width: 60px; padding: 10px 12px; }
+    .slider-nav { width: 32px; height: 32px; font-size: 1.2rem; }
+}
