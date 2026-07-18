@@ -165,7 +165,7 @@
         const slide = document.createElement('div');
         slide.className = 'slide';
         const img = document.createElement('img');
-        img.src = 'Images/' + i + '.jpg';
+        img.src = i + '.jpg';
         img.alt = 'Foto ' + i;
         slide.appendChild(img);
         sliderTrack.appendChild(slide);
