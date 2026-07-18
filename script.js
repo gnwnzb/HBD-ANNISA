@@ -143,7 +143,7 @@
         const item = document.createElement('div');
         item.className = 'gallery-item';
         const img = document.createElement('img');
-        img.src = 'Images/' + i + '.jpg';
+        img.src = i + '.jpg';
         img.alt = 'Kenangan ' + i;
         img.loading = 'lazy';
         item.appendChild(img);
